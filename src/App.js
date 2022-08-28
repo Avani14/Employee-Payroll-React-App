@@ -1,8 +1,11 @@
-
+import {Routes,Route} from 'react-router-dom'
+import PayrollForm from './components/PayrollForm.js'
 function App() {
   return (
     <>
-      <h1>Hello World!</h1>
+      <Routes>
+        <Route exact path = "/" element={<PayrollForm/>} />
+      </Routes>
     </>
   );
 }
