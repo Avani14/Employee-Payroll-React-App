@@ -4,19 +4,19 @@
 
 body {
     margin: 0;
-    height: 100%;
+    width: 100%;
+    height: 100vh;
 }
 
-.payroll-main{
+.payroll-main {
     height: 100%;
     min-height: calc(100% - 80px);
     background-color: #f7f7f7;
-  
     justify-content: center;
     align-items: center;
     padding: 0;
-  }
-  
+}
+
 
 .header {
     padding: 15px 0;
@@ -48,7 +48,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 0px;
     color: #82A70C;
-    padding-left: 10px;
+    padding-left: 20px;
     text-transform: capitalize;
 }
 
@@ -57,12 +57,13 @@ body {
 }
 
 .form-content {
-    min-height: calc(100% - 80px);
-    background-color: #f7f7f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0px solid green;
+    width: 800px;
+    margin-left: 19em;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    background-color: whitesmoke;
+    border-radius: 4px;
+    font-size: 18px;
 }
 
 .form {
@@ -79,9 +80,12 @@ body {
     font: normal normal bold 28px/37px Roboto;
     letter-spacing: 0px;
     color: #42515F;
+    background-color: white;
     text-transform: capitalize;
     opacity: 1;
-    padding-bottom: 20px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 6px;
 }
 
 .row-content {
@@ -153,9 +157,9 @@ select {
     margin-bottom: 10px;
     justify-content: space-between;
     margin-top: 20px;
-  }
-  
-  .button {
+}
+
+.button {
     font-size: 20px;
     font-family: Roboto;
     letter-spacing: 0px;
@@ -168,62 +172,17 @@ select {
     padding: 7px 7px;
     border: 1px solid #707070;
     cursor: pointer;
-  }
-  
-  .submitButton {
+}
+
+.submitButton {
     border: none;
     border: 1px solid grey;
     margin-right: 30px;
-  }
-  
-  .cancelButton {
-    text-decoration: none;
-    text-align: center;
-  }
-  
-    .resetButton {
-        margin-right: 10px;
-    }
-
-    error-output {
-        margin-left: 10px;
-        font-size: 15px;
-        font-style: italic;
-        color: rgb(231, 66, 66);
-    }
-
-@media only screen and (max-width:600px) {
-    .form {
-        margin-top: 10px;
-    }
-    .submit-reset {
-        width: 100%;
-        display: flex;
-        flex-grow: 1;
-        flex-direction: row-reverse;
-        justify-content: space-between
-    }
-    .cancelButton {
-        margin-left: 0px;
-    }
-    .form {
-        width: 85%;
-        padding: 44ox 20px;
-    }
-    .profile-lable {
-        margin-left: 0px;
-    }
+}
+.resetButton {
+    margin-right: 10px;
 }
 
-@media only screen and (max-width: 960px) {
-    .cancelButton {
-        margin-left: 0px;
-    }
-    .form {
-        width: 85%;
-        padding: 44px 20px;
-    }
-}
 
 a.button:hover {
     background: grey;
@@ -238,8 +197,4 @@ a.button:hover {
 .resetButton:hover {
     background: grey;
     color: white;
-}
-
-.department {
-    margin-left: 30px;
 }

@@ -15,13 +15,14 @@ function PayrollForm() {
     name:'',
     salary:'',
     email:'',
+    profile:'',
     password:'',
     gender:'',
     start_date:'',
     allDepartment: [
-        'HR', 'Sales', 'Finance', 'Engineer', 'Others'
+        'HR', 'Sales', 'Finance', 'IT', 'Others'
     ],
-    department:'',
+    department: [],
   }
   const [formValue,setValues] = useState(initialValues)
   const changeValue = (event) =>{
@@ -29,13 +30,53 @@ function PayrollForm() {
         ...formValue,
         [event.target.name]:event.target.value})
   }
-  const save = (event) =>
+  
+  const save = async(event) =>
   {
-    console.log(event)
+    let object = {
+        name:formValue.name,
+        salary:formValue.salary,
+        email:formValue.email,
+        profile:formValue.profile.pic,
+        password:formValue.password,
+        gender:formValue.gender,
+        department:formValue.department,
+        start_date:formValue.start_date
+    }
+    localStorage.setItem("empMap", JSON.stringify(object));
+    console.log(object)
   }
   const reset = () =>{
     setValues({...initialValues})
   }
+  const setData = (obj) => {
+    let array=obj.startDate;
+    console.log(array);
+    console.log()
+     setValues({
+       ...formValue,
+       ...obj,
+       id: obj.empId,
+       name: obj.name,
+       departmentValue: obj.department,
+       start_date:obj.start_date
+     });
+   };
+  const onCheckChange = (name) => {
+    let index = formValue.department.indexOf(name);
+
+    let depArray = [...formValue.department]
+    if (index > -1)
+        depArray.splice(index, 1)
+    else
+        depArray.push(name);
+        setValues({ ...formValue, department: depArray });
+}
+
+const getChecked = (name) => {
+    return formValue.department && formValue.department.includes(name);
+}
+
   return (
     <div className="payroll-main">
             <header className='header-content header'>
@@ -48,7 +89,7 @@ function PayrollForm() {
                 </div>
             </header>
             <div className="form-content">
-                <form className="form-head" action="#" onSubmit={save}>
+                <form className="form-head" onSubmit={save}>
                     <div className="form-head">Employee Payroll form</div>
                         <div className="row-content">
                             <label className="label text" htmlFor="name">Name</label>
@@ -86,12 +127,22 @@ function PayrollForm() {
                         </div>
                     </div>
                     <div className="row-content">
-                        <label className="label text" htmlFor="departments">Department</label>
+                        <label className="label text" htmlFor="department">Department</label>
                         <div>
-                            
+                            {formValue.allDepartment.map(item => (
+                                <span key={item}>
+                                    <input className="checkbox" type="checkbox" onChange={() => onCheckChange(item)} name={item}
+                                        checked={getChecked(item)} value={item} />
+                                    <label className="text" htmlFor={item}>{item}</label>
+                                </span>
+                            ))}
                         </div>
                     </div>
-
+                    <div className="row-content">
+                        <label className="label text" htmlFor="email">email</label>
+                        <input className="input" type="text" id="email" name="email" value={formValue.email} onChange={changeValue} />
+                    
+                    </div>
                     <div className="row-content">
                         <label className="label text" htmlFor="salary">Salary</label>
                         <input className="input" type="text" id="salary" name="salary" value={formValue.salary} onChange={changeValue} />
@@ -99,76 +150,18 @@ function PayrollForm() {
                     </div>
 
                     <div className="row-content">
-                        <label className="label text" htmlFor="startDate">Start Date</label>
-                        <div>
-                            <select value={formValue.day} onChange={changeValue} id="day" name="day">
-                            <option value="" disabled selected>Day</option>
-                                <option value="01">1</option>
-                                <option value="02">2</option>
-                                <option value="03">3</option>
-                                <option value="04">4</option>
-                                <option value="05">5</option>
-                                <option value="06">6</option>
-                                <option value="07">7</option>
-                                <option value="08">8</option>
-                                <option value="09">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                                <option value="21">21</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                                <option value="24">24</option>
-                                <option value="25">25</option>
-                                <option value="26">26</option>
-                                <option value="27">27</option>
-                                <option value="28">28</option>
-                                <option value="29">29</option>
-                                <option value="30">30</option>
-                                <option value="31">31</option>
-                            </select>
-                            <select value={formValue.month} onChange={changeValue} id="month" name="month">
-                            <option value="" disabled selected>Month</option>
-                                <option value="1">January</option>
-                                <option value="2">Febuary</option>
-                                <option value="3">March</option>
-                                <option value="4">April</option>
-                                <option value="5">May</option>
-                                <option value="6">June</option>
-                                <option value="7">July</option>
-                                <option value="8">August</option>
-                                <option value="9">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
-                            </select>
-                            <select value={formValue.year} onChange={changeValue} id="year" name="year">
-                            <option value="" disabled selected>Year</option>
-                                <option value="2021">2021</option>
-                                <option value="2020">2020</option>
-                                <option value="2019">2019</option>
-                                <option value="2018">2018</option>
-                                <option value="2017">2017</option>
-                                <option value="2016">2016</option>
-                            </select>
-                        </div>
+                        <label className="label text" htmlFor="start_date">Start Date</label>
+                        <input className="input" type="date" name="start_date" id="start_date" value={formValue.start_date} onChange={changeValue} />
                     </div>
-                    <div className="buttonParent">
-                        <Link to="/" className="resetButton button cancelButton">Cancel</Link>
+                    <div className="row-content">
+                        <label className="label text" htmlFor="password">password</label>
+                        <input className="input" type="password" id="password" name="password" value={formValue.password} onChange={changeValue} />
+                    
+                    </div>
                         <div className="submit-reset">
-                        
-                            <button type="submit" className="button submitButton" id="submitButton">{formValue.isUpdate ? 'Update' : 'Submit'}</button>
+                            <button type="submit" className="button submitButton" >Submit</button>
                             <button type="button" onClick={reset} className="resetButton button">Reset</button>
                         </div>
-                    </div >
                 </form >
             </div >
         </div >
